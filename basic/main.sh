@@ -4,7 +4,7 @@
 
 # Логотип команды
 show_logotip(){
-    bash <(curl -s https://raw.githubusercontent.com/Sshadow84/Profit-Nodes/refs/heads/main/basic/name.sh)
+    bash <(curl -s https://raw.githubusercontent.com/Sshadow84/ProfitNodes/main/basic/name.sh)
 }
 
 # Функция для подтверждения выбора пользователя
