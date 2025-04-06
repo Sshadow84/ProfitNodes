@@ -2,11 +2,6 @@
 
 # Скрипт для отображения основной страницы по настройке сервера
 
-# Логотип команды
-show_logotip(){
-    bash <(curl -s https://raw.githubusercontent.com/Sshadow84/ProfitNodes/main/basic/name.sh)
-}
-
 # Функция для подтверждения выбора пользователя
 confirm() {
     local prompt="$1"
@@ -25,34 +20,6 @@ confirm() {
     esac
 }
 
-# Функция для настройки iptables
-setup_iptables() {
-    echo "Загружается и выполняется скрипт для настройки iptables..."
-    bash <(curl -s https://raw.githubusercontent.com/Sshadow84/Profit-Nodes/refs/heads/main/basic/admin/iptables.sh)
-    echo "Настройка iptables завершена."
-}
-
-# Функция для установки Fail2ban
-install_fail2ban() {
-    echo "Загружается и выполняется скрипт для установки Fail2ban..."
-    bash <(curl -s https://raw.githubusercontent.com/Sshadow84/Profit-Nodes/refs/heads/main/basic/admin/fail2ban.sh)
-    echo "Установка Fail2ban завершена."
-}
-
-# Функция для очистки памяти
-autoclear_memory() {
-    echo "Загружается и выполняется скрипт для настройки автоматического очищения..."
-    bash <(curl -s https://raw.githubusercontent.com/Sshadow84/Profit-Nodes/refs/heads/main/basic/admin/clear_auto.sh)
-    echo "Успешно."
-}
-
-# Функция для очистки памяти
-clear_memory() {
-    echo "Загружается и выполняется скрипт для очистки памяти..."
-    bash <(curl -s https://raw.githubusercontent.com/Sshadow84/Profit-Nodes/refs/heads/main/basic/admin/clear.sh)
-    echo "Очистка памяти завершена."
-}
-
 show_node_list() {
     echo "Выберите действие:"
     echo -e "1. Elixir (mainnet/testnet)"
@@ -63,7 +30,7 @@ show_node_list() {
     echo "0. Выход"
 }
 
-BASE_URL="https://raw.githubusercontent.com/Sshadow84/Profit-Nodes/refs/heads/main/nodes"
+BASE_URL="https://raw.githubusercontent.com/Sshadow84/Profit-Nodes/main/nodes"
 node_menu() {
     case "$1" in
         1) bash <(curl -s ${BASE_URL}/elixir.sh) ;;
@@ -84,14 +51,9 @@ node_list_start() {
     done
 }
 
-
 # Функция для отображения меню
 show_menu() {
     echo "Выберите действие:"
-    echo "1. Настройка iptables"
-    echo "2. Установка Fail2ban"
-    echo "3. Установка автоудаления логов"
-    echo "4. Экспресс очистка памяти"
     echo "9. Ноды (скрипты)"
     echo "0. Выход"
 }
@@ -99,10 +61,6 @@ show_menu() {
 # Функция для обработки выбора пользователя
 handle_choice() {
     case "$1" in
-        1) setup_iptables ;;
-        2) install_fail2ban ;;
-        3) autoclear_memory ;;   
-        4) clear_memory ;; 
         9) node_list_start ;;               
         0) echo "Выход."; exit 0 ;;
         *) echo "Неверный выбор. Попробуйте снова." ;;
@@ -110,7 +68,6 @@ handle_choice() {
 }
 
 while true; do
-    show_logotip
     show_menu
     read -p "Ваш выбор: " action
     handle_choice "$action"  # Используем переменную action
